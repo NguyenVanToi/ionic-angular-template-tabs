@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="goBack()">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-title>Contact</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>If you have a question, reach me from here !</ion-label>
+    </ion-card-header>
+    <ion-input type="text" placeholder="Email" [(ngModel)]="contact.email"></ion-input>
+    <ion-input type="text" placeholder="Message" [(ngModel)]="contact.content"></ion-input>
+  </ion-card>
+
+  <ion-button expand="full" class="ion-margin" color="primary" (click)="showMessage()">Send Message</ion-button>
+</ion-content>
