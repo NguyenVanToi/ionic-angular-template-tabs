@@ -1,3 +1,4 @@
+import { LoadingService } from './../../utils/services/loading.service';
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { VirtualTimeScheduler } from 'rxjs';
@@ -13,22 +14,27 @@ export class LoginPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit() {}
 
-  goMainPage() {
+  async goMainPage() {
+    this.loadingService.showLoading();
     console.log('The user info: ', this.user);
-    if (this.user.username == 'isoguzay' && this.user.password == '1234') {
-      this.navCtrl.navigateForward('tabs', {
-        state: {
-          user: this.user,
-        },
-      });
-    } else {
-      this.inCorrectDataAlert();
-    }
+    await setTimeout(() => {
+      if (this.user.username === 'isoguzay' && this.user.password === '1234') {
+        this.navCtrl.navigateForward('tabs', {
+          state: {
+            user: this.user,
+          },
+        });
+      } else {
+        this.inCorrectDataAlert();
+      }
+      this.loadingService.dismiss();
+    }, 3000);
   }
 
   async inCorrectDataAlert() {
